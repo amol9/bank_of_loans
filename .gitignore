@@ -1,1 +1,5 @@
 *.csv
+*.pyc
+data/*
+pred/*
+temp/*
