@@ -6,6 +6,6 @@ A Hackerearth challenge. (https://www.hackerearth.com/problem/machine-learning/b
 
 Solution Status:
 
-Amateur, I'm a beginner in ML, so, I might have missed out a lot of stuff.
-In progress.
-Implemented using sklearn, as well as tensorflow, both have working code.
+* Amateur, I'm a beginner in ML, so, I might have missed out a lot of stuff.
+* In progress.
+* Implemented using sklearn, as well as tensorflow, both have working code.
