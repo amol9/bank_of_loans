@@ -1,15 +1,14 @@
 import pandas as pd
 import pickle
 
-from transform import *
+from .transform import *
+from . import config
 
 def get_common_cols():
-    #train_dataset = pd.read_csv("./data/train_indessa.csv")
-    train_dataset = pd.read_csv("./data/10k_train.csv")#train_indessa.csv")
+    train_dataset = pd.read_csv(config.train_fn)
     train_dataset = transform_dataset(train_dataset)
 
-    #test_dataset = pd.read_csv("./data/test_indessa.csv")
-    test_dataset = pd.read_csv("./data/10k_test.csv")
+    test_dataset = pd.read_csv(config.test_fn)
     test_dataset = transform_dataset(test_dataset)
 
     train_cols = train_dataset.columns.tolist()
@@ -20,12 +19,14 @@ def get_common_cols():
     return common_cols
 
 def store_common_cols(cols):
-    with open("common_cols_10k", "wb") as f:
-        pickle.dump(cols, f)
+    with open(config.com_cols_fn, "w") as f:
+        #pickle.dump(cols, f)
+        f.write("\n".join(cols))
 
 def load_common_cols():
-    with open("common_cols_10k", "rb") as f:
-        return pickle.load(f)
+    with open(config.com_cols_fn, "r") as f:
+        #return pickle.load(f)
+        return f.read().splitlines()
 
 if __name__ == "__main__":
     cols = get_common_cols()

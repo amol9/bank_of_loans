@@ -3,13 +3,13 @@ import numpy as np
 import pickle
 import tensorflow as tf
 
-from transform import *
-from common_cols import *
+from ..common.transform import *
+from ..common.common_cols import *
+from ..common import config
 
 
 def pred(f, session, x):
-    #dataset = pd.read_csv("./data/test_indessa.csv")
-    dataset = pd.read_csv("./data/10k_test.csv")
+    dataset = pd.read_csv(config.test_fn)
 
     dataset = transform_dataset(dataset)
 
@@ -33,7 +33,7 @@ def pred(f, session, x):
 
 
     print(y_pred)
-    with open("y_pred_tf_10k", "w") as fl:
+    with open(config.tf.result_fn, "w") as fl:
         fl.write("\n".join(list(map(lambda x: str(x), y_pred.flatten().tolist()))))
 
 if __name__ == "__main__":
