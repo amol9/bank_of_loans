@@ -1,5 +1,5 @@
 from .common import config
 
-if config.lib == "tf":
+if config.method == "tf":
     from .tf import train
     train.main()

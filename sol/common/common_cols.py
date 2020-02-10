@@ -21,12 +21,15 @@ def get_common_cols():
 def store_common_cols(cols):
     with open(config.com_cols_fn, "w") as f:
         #pickle.dump(cols, f)
+        if 'loan_status' in cols:
+            cols.remove('loan_status')
         f.write("\n".join(cols))
 
 def load_common_cols():
     with open(config.com_cols_fn, "r") as f:
         #return pickle.load(f)
         return f.read().splitlines()
+        
 
 if __name__ == "__main__":
     cols = get_common_cols()

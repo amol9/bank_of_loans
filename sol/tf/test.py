@@ -6,6 +6,8 @@ import tensorflow as tf
 from ..common.transform import *
 from ..common.common_cols import *
 from ..common import config
+from ..common.save_pred import save
+
 
 
 def pred(f, session, x):
@@ -15,7 +17,9 @@ def pred(f, session, x):
 
     common_cols = load_common_cols()
 
-    dataset = dataset[common_cols]
+    y_actl = dataset['loan_status']
+
+    dataset = dataset[common_cols + ['loan_status']]    #ERROR !!TEMP ONLY!!
 
     x_test = np.matrix(dataset.values).transpose()
 
@@ -32,9 +36,11 @@ def pred(f, session, x):
     y_pred = session.run(f, feed_dict={ x: x_test})
 
 
-    print(y_pred)
-    with open(config.tf.result_fn, "w") as fl:
-        fl.write("\n".join(list(map(lambda x: str(x), y_pred.flatten().tolist()))))
+    #print(y_pred)
+    #with open(config.tf.result_fn, "w") as fl:
+    #    fl.write("\n".join(list(map(lambda x: str(x), y_pred.flatten().tolist()))))
+
+    save(y_pred.flatten(), y_actl.values, config.tf.result_fn)
 
 if __name__ == "__main__":
     pred(None)

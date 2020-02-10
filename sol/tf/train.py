@@ -7,6 +7,7 @@ from ..common.common_cols import *
 from ..common.transform import *
 from .test import *
 from ..common import config
+from ..common.misc import *
 
 
 def main():
