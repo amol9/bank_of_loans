@@ -1,6 +1,6 @@
 {
     "experiment": "50k",
     "method": "tf",
-    "tf_runs": 10,
+    "tf_runs": 5000,
     "exp_name": "lrn_rate_0.1"
 }

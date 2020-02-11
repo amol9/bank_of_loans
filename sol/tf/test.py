@@ -40,7 +40,7 @@ def pred(f, session, x):
     #with open(config.tf.result_fn, "w") as fl:
     #    fl.write("\n".join(list(map(lambda x: str(x), y_pred.flatten().tolist()))))
 
-    save(y_pred.flatten(), y_actl.values, config.tf.result_fn)
+    save(y_pred.flatten(), y_actl.values, config.tf.result_fn, config.tf.acc_fn)
 
 if __name__ == "__main__":
     pred(None)
