@@ -11,25 +11,31 @@ from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
 from sklearn import metrics
 
-from transform import *
-from test import *
-from common_cols import *
+from ..common.transform import *
+from .test import *
+from ..common.common_cols import *
+from ..common import config
 
-dataset = pd.read_csv("./data/10k_train.csv")#train_indessa.csv")
-#dataset = pd.read_csv("./data/train_indessa.csv")
-dataset = transform_dataset(dataset)
 
-#transform('last_week_pay', lambda x: int(re.search("\\d+", str(x))[0]))
+def main():
+    dataset = pd.read_csv(config.train_fn)
+    dataset = transform_dataset(dataset)
 
-common_cols = load_common_cols()
+    #transform('last_week_pay', lambda x: int(re.search("\\d+", str(x))[0]))
 
-x_train = dataset[common_cols].values
-y_train = dataset['loan_status'].values
+    common_cols = load_common_cols()
 
-regressor = LinearRegression()
-regressor.fit(x_train, y_train)
+    x_train = dataset[common_cols].values
+    y_train = dataset['loan_status'].values
 
-with open('model', 'wb') as f:
-    pickle.dump(regressor, f)
+    regressor = LinearRegression()
+    regressor.fit(x_train, y_train)
 
-#pred(regressor, train_cols)
+    with open('model', 'wb') as f:
+        pickle.dump(regressor, f)
+
+    pred(regressor)
+
+
+if __name__ == "__main__":
+    main()

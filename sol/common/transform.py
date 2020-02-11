@@ -3,22 +3,13 @@ import numpy as np
 import matplotlib.pyplot as plt
 import re
 import math
+from sklearn.preprocessing import StandardScaler, MinMaxScaler
+from .misc import *
 
 
 def transform_dataset(dataset):
     dataset = dataset.fillna(0)
 
-
-    #scrub
-    def transform_term():
-        t = dataset['term']
-        t.transform(lambda x: int(x.split()[0]))
-        dataset['term'] = t
-
-    def transform(col, f):
-        l = len(dataset[col])
-        for i in range(0, l):
-            dataset[col][i] = f(dataset[col][i])
 
     def transform_lwp(v):
         if type(v) != str and math.isnan(v):   #??
@@ -33,39 +24,10 @@ def transform_dataset(dataset):
         else:
             return 0
 
-    def transform_vsj(v):
-        if type(v) != str and math.isnan(v):
-            return 0
-        elif v.lower() == 'verified':
-            return 1
-        else:
-            return 2
-
-    def transform_at(v):
-        if v == "INDIVIDUAL":
-            return 0
-        else:
-            return 1
-
-
+    
     #transform_term()
     dataset['term'] = dataset['term'].transform(lambda x: int(x.split()[0]))
     dataset['last_week_pay'] = dataset['last_week_pay'].transform(transform_lwp).astype('int32')
-    #dataset['verification_status_joint'] = dataset['verification_status_joint'].transform(transform_vsj).astype('int8')
-    #dataset['application_type'] = dataset['application_type'].transform(transform_at).astype('int8')
-    #dataset['initial_list_status'] = dataset['initial_list_status'].transform(lambda x: 0 if x == 'w' else 1).astype('int8')
-
-    #states = {}
-    #for i, s in enumerate(dataset['addr_state'].unique().tolist()): states[s] = i
-    #dataset['addr_state'] = dataset['addr_state'].transform(lambda x: states[x]).astype('int8')
-
-    #dataset['zip_code'] = dataset['zip_code'].transform(lambda x: x[0:3]).astype('int32')
-
-    #d = {}
-    #col = 'somethi'
-    #for i, s in enumerate(dataset['col'].unique().tolist()): states[s] = i
-
-    # emp_length
     dataset['emp_length'] = dataset['emp_length'].transform(transform_lwp).astype('int32')
 
 
@@ -79,7 +41,8 @@ def transform_dataset(dataset):
         'home_ownership',
         'verification_status',
         'pymnt_plan',
-        'purpose'
+        'purpose',
+        'term'
     ]
 
     ignore_list = [
@@ -87,11 +50,50 @@ def transform_dataset(dataset):
         'emp_title',
         'addr_state',
         'desc',
-        'title'
+        'title',
+        'member_id'
     ]
 
-    dataset = pd.get_dummies(dataset, "d", "_", columns=dummy_list)
+    standardize_list = [
+        'loan_amnt',
+        'funded_amnt',
+        'funded_amnt_inv',
+        'int_rate',
+        'emp_length',
+        'annual_inc',
+        'dti',
+        'delinq_2yrs',
+        'inq_last_6mths',
+        'mths_since_last_delinq',
+        'mths_since_last_record',
+        'open_acc',
+        'pub_rec',
+        'revol_bal',
+        'revol_util',
+        'total_acc',
+        'total_rec_int',
+        'total_rec_late_fee',
+        'recoveries',
+        'collection_recovery_fee',
+        'collections_12_mths_ex_med',
+        'mths_since_last_major_derog',
+        'last_week_pay',
+        'acc_now_delinq',
+        'tot_coll_amt',
+        'tot_cur_bal',
+        'total_rev_hi_lim'
+    ]
+
+
+    scaler = MinMaxScaler()# StandardScaler()
+    for s in standardize_list:
+        dataset[s] = scaler.fit_transform(dataset[s].values.reshape(-1, 1)).flatten()
+
+    for d in dummy_list:
+        dataset = pd.get_dummies(dataset, d, "_", columns=[d])
+
     dataset = dataset.drop(columns=ignore_list)
 
+    brk()
     return dataset
 

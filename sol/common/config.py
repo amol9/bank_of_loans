@@ -24,5 +24,11 @@ class tf:
     result_fn = path.join(result_dir, str(runs) + "_runs_" + now_str + ".csv")
     acc_fn = result_fn[0 : -4] + "_acc.txt"
 
+class sk:
+    model_dir = path.join(exp_dir, "models", "sk")
+    result_dir = path.join(exp_dir, "result", "sk")
+    result_fn = path.join(result_dir, now_str + ".csv")
+    acc_fn = result_fn[0 : -4] + "_acc.txt"
+
 other_dir = path.join(exp_dir, "other")
 com_cols_fn = path.join(other_dir, "com_cols.txt")
