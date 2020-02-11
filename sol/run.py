@@ -5,6 +5,9 @@ if config.method == "tf":
     train.main()
 elif config.method == "sk":
     from .sk import train
-    train.main()
+    train.linear_rg()
+elif config.method == "sk.lg":
+    from .sk import train
+    train.logistic_rg()
 else:
     print("invalid method")

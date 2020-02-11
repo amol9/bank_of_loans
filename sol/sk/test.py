@@ -17,7 +17,7 @@ from ..common import config
 from ..common.save_pred import *
 
 
-def pred(regressor):
+def pred(regressor, lg=False):
     dataset = pd.read_csv(config.test_fn)
 
     dataset = transform_dataset(dataset)
@@ -36,7 +36,7 @@ def pred(regressor):
 
     y_pred = regressor.predict(x_test)
 
-    save(y_pred.flatten(), y_actl.values, config.sk.result_fn, config.sk.acc_fn)
+    save(y_pred.flatten(), y_actl.values, config.sk.result_fn, config.sk.acc_fn, lg=lg)
     #print(y_pred)
 
 if __name__ == "__main__":

@@ -4,7 +4,7 @@ from .acc import *
 from . import config
 
 
-def save(pred, actl, filepath, acc_filepath):
+def save(pred, actl, filepath, acc_filepath, lg=False):
     result = pd.DataFrame({
         "Predicted": pred,
         "Actual": actl
@@ -13,7 +13,11 @@ def save(pred, actl, filepath, acc_filepath):
     result.to_csv(filepath, index=False)
     print("result saved to " + filepath)
 
-    acc_result = calc_accuracy(result)
+    acc_result = None
+    if not lg:
+        acc_result = calc_accuracy(result)
+    else:
+        acc_result = calc_accuracy_lg(result)
 
     with open(acc_filepath, 'w') as f:
         acc_result.save_to_file(f)

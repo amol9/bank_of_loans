@@ -25,9 +25,10 @@ class tf:
     acc_fn = result_fn[0 : -4] + "_acc.txt"
 
 class sk:
+    exp = cfg.sk_exp_name
     model_dir = path.join(exp_dir, "models", "sk")
     result_dir = path.join(exp_dir, "result", "sk")
-    result_fn = path.join(result_dir, now_str + ".csv")
+    result_fn = path.join(result_dir, exp + "_" + now_str + ".csv")
     acc_fn = result_fn[0 : -4] + "_acc.txt"
 
 other_dir = path.join(exp_dir, "other")

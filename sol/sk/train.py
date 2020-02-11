@@ -8,7 +8,7 @@ import pickle
 import seaborn as seabornInstance
 
 from sklearn.model_selection import train_test_split
-from sklearn.linear_model import LinearRegression
+from sklearn.linear_model import LinearRegression, LogisticRegression
 from sklearn import metrics
 
 from ..common.transform import *
@@ -17,7 +17,7 @@ from ..common.common_cols import *
 from ..common import config
 
 
-def main():
+def load():
     dataset = pd.read_csv(config.train_fn)
     dataset = transform_dataset(dataset)
 
@@ -28,13 +28,31 @@ def main():
     x_train = dataset[common_cols].values
     y_train = dataset['loan_status'].values
 
+    return x_train, y_train
+
+
+def linear_rg():
+    x_train, y_train = load()
+
     regressor = LinearRegression()
     regressor.fit(x_train, y_train)
 
-    with open('model', 'wb') as f:
-        pickle.dump(regressor, f)
+    #with open('model', 'wb') as f:
+    #    pickle.dump(regressor, f)
 
     pred(regressor)
+
+
+def logistic_rg():
+    x_train, y_train = load()
+
+    regressor = LogisticRegression()
+    regressor.fit(x_train, y_train)
+
+    #with open('model', 'wb') as f:
+    #    pickle.dump(regressor, f)
+
+    pred(regressor, lg=True)
 
 
 if __name__ == "__main__":
