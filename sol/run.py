@@ -2,7 +2,10 @@ from .common import config
 
 if config.method == "tf":
     from .tf import train
-    train.main()
+    train.linear_rg()
+if config.method == "tf.lg":
+    from .tf import train
+    train.logistic_rg()
 elif config.method == "sk":
     from .sk import train
     train.linear_rg()

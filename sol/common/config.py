@@ -18,10 +18,11 @@ train_dir = path.join(exp_dir, "train")
 train_fn = path.join(train_dir, "train.csv")
 
 class tf:
+    exp = cfg.tf_exp_name
     model_dir = path.join(exp_dir, "models", "tf")
     result_dir = path.join(exp_dir, "result", "tf")
     runs = cfg.tf_runs
-    result_fn = path.join(result_dir, str(runs) + "_runs_" + now_str + ".csv")
+    result_fn = path.join(result_dir, exp + "_" + str(runs) + "_runs_" + now_str + ".csv")
     acc_fn = result_fn[0 : -4] + "_acc.txt"
 
 class sk:
