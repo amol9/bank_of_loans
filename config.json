@@ -1,6 +1,6 @@
 {
-    "experiment": "all",
-    "method": "sk.lg",
+    "experiment": "50k",
+    "method": "xg.lg",
     "tf_runs": 100,
     "sk_max_iter": 200,
     "tf_exp_name": "norm_lg_lrate0.01",

@@ -26,3 +26,5 @@ def logistic_rg():
 
     model = XGBClassifier()
     model.fit(x_train, y_train.values.ravel())
+
+    pred(model, lg=True)
