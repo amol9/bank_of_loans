@@ -1,5 +1,6 @@
 import pandas as pd
 import pickle
+from os import path
 
 from .transform import *
 from . import config
@@ -30,7 +31,13 @@ def load_common_cols():
         #return pickle.load(f)
         return f.read().splitlines()
         
+def make_common_cols_file():
+    if path.exists(config.com_cols_fn):
+        print("common cols file exists, not creating again")
+    else:
+        cols = get_common_cols()
+        store_common_cols(cols)
+        print("created common cols file")
 
 if __name__ == "__main__":
-    cols = get_common_cols()
-    store_common_cols(cols)
+    make_common_cols_file()

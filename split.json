@@ -1,8 +1,8 @@
 {
     "src_data_dir": "data",
     "src_dataset": "train_indessa.csv",
-    "total": 50000,
-    "train": 40000,
-    "test": 10000,
-    "experiment": "50k"
+    "total": "all",
+    "train": "total*0.8",
+    "test": "total*0.2",
+    "experiment": "all"
 }

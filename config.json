@@ -1,7 +1,8 @@
 {
-    "experiment": "50k",
-    "method": "tf.lg",
+    "experiment": "all",
+    "method": "sk.lg",
     "tf_runs": 100,
-    "tf_exp_name": "norm_lg",
-    "sk_exp_name": "norm_lg"
+    "tf_exp_name": "norm_lg_lrate0.01",
+    "sk_exp_name": "norm_lg",
+    "xg_exp_name": "norm_lg"
 }

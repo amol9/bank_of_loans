@@ -83,7 +83,7 @@ def logistic_rg():
 
     L = tf.reduce_mean(tf.nn.sigmoid_cross_entropy_with_logits(logits=f, labels=y))
 
-    optimizer = tf.train.GradientDescentOptimizer(learning_rate=0.003).minimize(L)
+    optimizer = tf.train.GradientDescentOptimizer(learning_rate=0.01).minimize(L)
 
     session = tf.Session()
     session.run(tf.global_variables_initializer())
