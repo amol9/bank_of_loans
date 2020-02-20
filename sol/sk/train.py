@@ -46,7 +46,7 @@ def linear_rg():
 def logistic_rg():
     x_train, y_train = load()
 
-    regressor = LogisticRegression()
+    regressor = LogisticRegression(max_iter=config.sk.max_iter)
     regressor.fit(x_train, y_train)
 
     #with open('model', 'wb') as f:

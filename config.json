@@ -2,6 +2,7 @@
     "experiment": "all",
     "method": "sk.lg",
     "tf_runs": 100,
+    "sk_max_iter": 200,
     "tf_exp_name": "norm_lg_lrate0.01",
     "sk_exp_name": "norm_lg",
     "xg_exp_name": "norm_lg"

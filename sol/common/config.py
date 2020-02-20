@@ -31,6 +31,7 @@ class sk:
     result_dir = path.join(exp_dir, "result", "sk")
     result_fn = path.join(result_dir, exp + "_" + now_str + ".csv")
     acc_fn = result_fn[0 : -4] + "_acc.txt"
+    max_iter = cfg.sk_max_iter
 
 class xg:
     exp = cfg.xg_exp_name

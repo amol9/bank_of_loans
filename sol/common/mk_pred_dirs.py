@@ -1,4 +1,4 @@
-from os import path
+from os import path, sep
 from os import mkdir
 import sys
 
@@ -13,12 +13,12 @@ def make_pred_dirs(exp):
         "models",
         "result",
         "other",
-        "models\\tf",
-        "models\\sk",
-        "models\\xg",
-        "result\\tf",
-        "result\\sk",
-        "result\\xg"
+        "models" + sep + "tf",
+        "models" + sep + "sk",
+        "models" + sep + "xg",
+        "result" + sep + "tf",
+        "result" + sep + "sk",
+        "result" + sep + "xg"
     ]
 
     for p in paths:
