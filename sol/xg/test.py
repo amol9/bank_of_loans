@@ -34,7 +34,7 @@ def pred(model, lg=False):
 
     y_pred = model.predict(x_test)
 
-    save(y_pred.flatten(), y_actl.values, config.sk.result_fn, config.sk.acc_fn, lg=lg)
+    save(y_pred.flatten(), y_actl.values, config.xg.result_fn, config.xg.acc_fn, lg=lg)
     #print(y_pred)
 
 if __name__ == "__main__":

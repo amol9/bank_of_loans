@@ -25,6 +25,7 @@ def logistic_rg():
     #y_train = np.matrix(y_train.values).transpose()
 
     model = XGBClassifier()
-    model.fit(x_train, y_train.values.ravel())
+    print("fitting using xgb classifier")
+    model.fit(x_train, y_train.values.ravel(), verbose=True)
 
     pred(model, lg=True)
